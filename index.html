@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HealthGuard AI X</title>
+
+  <!-- IMPORTANT for responsiveness -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: white;
+    }
+
+    .container {
+      width: 95%;
+      max-width: 500px;
+      background: #0f172a;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      text-align: center;
+    }
+
+    h1 {
+      color: #22c55e;
+      margin-bottom: 5px;
+    }
+
+    p {
+      color: #94a3b8;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      border: none;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      border: none;
+      background: #22c55e;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #16a34a;
+    }
+
+    #chat {
+      margin-top: 20px;
+      text-align: left;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .msg {
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 12px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .user {
+      background: #334155;
+    }
+
+    .bot {
+      background: #1e293b;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>🧠 HealthGuard AI X</h1>
+  <p>Smart Healthcare Assistant</p>
+
+  <input id="input" placeholder="Enter symptoms (fever, cough...)">
+  <button onclick="analyze()">Analyze</button>
+
+  <div id="chat"></div>
+
+</div>
+
+<script>
+function analyze() {
+  let input = document.getElementById("input").value.toLowerCase();
+  let chat = document.getElementById("chat");
+
+  chat.innerHTML += `<div class='msg user'>🧑 ${input}</div>`;
+
+  let disease = "General Condition";
+  let risk = "Low";
+  let advice = "Monitor your symptoms.";
+
+  if (input.includes("fever") && input.includes("cough") && input.includes("fatigue")) {
+    disease = "Flu / Viral Infection";
+    risk = "Medium";
+    advice = "Take rest and monitor temperature.";
+  }
+
+  else if (input.includes("sneezing") && input.includes("runny nose")) {
+    disease = "Common Cold";
+    risk = "Low";
+    advice = "Stay warm and hydrated.";
+  }
+
+  else if (input.includes("dry cough") && input.includes("fever")) {
+    disease = "COVID-like Infection";
+    risk = "High";
+    advice = "Isolate and consult doctor.";
+  }
+
+  else if (input.includes("blood") && input.includes("mucus")) {
+    disease = "Serious Lung Infection / TB";
+    risk = "High";
+    advice = "Immediate medical attention required.";
+  }
+
+  else if (input.includes("chest pain")) {
+    disease = "Heart / Lung Risk";
+    risk = "High";
+    advice = "Urgent doctor consultation needed.";
+  }
+
+  let reply = `
+  🤖 <b>AI Result:</b><br><br>
+  <b>Disease:</b> ${disease}<br>
+  <b>Risk Level:</b> ${risk}<br>
+  <b>Advice:</b> ${advice}<br><br>
+
+  🌿 <b>General Advice:</b><br>
+  ✔ Drink water 💧<br>
+  ✔ Meditation 🧘<br>
+  ✔ Rest 😴<br>
+  ✔ Exercise 🏃
+  `;
+
+  chat.innerHTML += `<div class='msg bot'>${reply}</div>`;
+}
+</script>
+
+</body>
+</html>
